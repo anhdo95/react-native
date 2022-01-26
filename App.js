@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 
@@ -20,9 +20,26 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Categories" component={CategoriesScreen} />
-        <Stack.Screen name="CategoryMeals" component={CategoryMealsScreen} />
+      <Stack.Navigator
+        screenOptions={{
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      >
+        <Stack.Screen
+          name="Categories"
+          component={CategoriesScreen}
+          options={{ title: "Meal Categories" }}
+        />
+        <Stack.Screen
+          name="CategoryMeals"
+          component={CategoryMealsScreen}
+          options={({ route }) => ({
+            title: route.params.category.title,
+            headerTintColor: route.params.category.color,
+          })}
+        />
         <Stack.Screen name="MealDetail" component={MealDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>

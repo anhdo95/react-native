@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function CategoryMeals() {
+export default function CategoryMeals(props) {
+  const { title } = props.route.params.category;
+
   return (
     <View style={styles.container}>
-      <Text>CategoryMeals Screen</Text>
+      <Text>{title} Screen</Text>
     </View>
   );
 }
