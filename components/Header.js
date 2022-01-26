@@ -1,10 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { Appbar } from 'react-native-paper';
 
 export default function Header(props) {
+  const _goBack = () => console.log('Went back');
+
+  const _handleSearch = () => console.log('Searching');
+
+  const _handleMore = () => console.log('Shown more');
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{props.title}</Text>
-    </View>
+    <Appbar.Header>
+      <Appbar.BackAction onPress={_goBack} />
+      <Appbar.Content title={props.title} />
+      <Appbar.Action icon="magnify" onPress={_handleSearch} />
+      <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
+    </Appbar.Header>
   );
 }
 
@@ -18,6 +28,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 50,
     color: '#fff',
-    fontWeight: 'bold'
+    fontFamily: 'open-sans-bold',
+    fontSize: 20
   }
 });

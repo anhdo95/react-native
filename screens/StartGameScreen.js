@@ -8,7 +8,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import Card from "../components/Card";
 import InputNumber from "../components/InputNumber";
@@ -34,46 +39,40 @@ export default function StartGameScreen(props) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <Card style={styles.card}>
-          <Text style={styles.title}>Enter a number!</Text>
-          <InputNumber
-            style={styles.input}
-            maxLength={2}
-            keyboardType="number-pad"
-            onChangeText={setNumber}
-            value={number}
-          />
-          <View style={styles.actions}>
-            <View style={styles.action}>
-              <Button
-                style={styles.button}
-                title="Reset"
-                onPress={handleReset}
-              />
+    <ScrollView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Card style={styles.card}>
+            <Text style={styles.title}>Enter a number!</Text>
+            <InputNumber
+              style={styles.input}
+              maxLength={2}
+              keyboardType="number-pad"
+              onChangeText={setNumber}
+              value={number}
+            />
+            <View style={styles.actions}>
+              <View style={styles.action}>
+                <Button title="Reset" onPress={handleReset} />
+              </View>
+              <View style={styles.action}>
+                <Button title="Confirm" onPress={handleConfirm} />
+              </View>
             </View>
-            <View style={styles.action}>
-              <Button
-                style={styles.button}
-                title="Confirm"
-                onPress={handleConfirm}
-              />
-            </View>
-          </View>
-        </Card>
-
-        {!!selectedNumber && (
-          <Card style={styles.selectedCard}>
-            <Text>You selected</Text>
-            <View style={styles.selectedNumberBox}>
-              <Text style={styles.selectedNumber}>{selectedNumber}</Text>
-            </View>
-            <Button title="Start Game" />
           </Card>
-        )}
-      </View>
-    </TouchableWithoutFeedback>
+
+          {!!selectedNumber && (
+            <Card style={styles.selectedCard}>
+              <Text>You selected</Text>
+              <View style={styles.selectedNumberBox}>
+                <Text style={styles.selectedNumber}>{selectedNumber}</Text>
+              </View>
+              <Button title="Start Game" onPress={props.onStart} />
+            </Card>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
+    </ScrollView>
   );
 }
 
@@ -81,13 +80,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 10,
+    marginVertical: 10,
   },
   card: {
+    width: "80%",
+    minWidth: 300,
+    maxWidth: "95%",
     alignItems: "center",
   },
   title: {
-    marginBottom: 5,
+    marginBottom: 10,
+    fontSize: 20,
   },
   input: {
     width: 60,
@@ -98,11 +101,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   action: {
+    width: Dimensions.get("window").width / 3,
+    maxWidth: 120,
     marginHorizontal: "1%",
   },
-  button: {},
   selectedCard: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 14,
   },
   selectedNumberBox: {
@@ -112,6 +116,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   selectedNumber: {
-    padding: 6
-  }
+    padding: 6,
+  },
 });
