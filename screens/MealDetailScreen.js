@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import { findMealById } from "../utils";
+import { useSelector } from "react-redux";
+
+import { selectMealById } from "../store/selectors/meals";
 
 export default function MealDetailScreen(props) {
-  const meal = findMealById(props.route.params.id);
+  const meal = useSelector(selectMealById(props.route.params.id));
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

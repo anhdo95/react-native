@@ -5,8 +5,7 @@ import CategoriesScreen from "./CategoriesScreen";
 import CategoryMealsScreen from "./CategoryMealsScreen";
 import MealDetailScreen from "./MealDetailScreen";
 
-import HeaderMenu from '../components/HeaderMenu'
-import { findMealById } from "../utils";
+import HeaderMenu from "../components/HeaderMenu";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +35,7 @@ export default function MealsScreen() {
         name="MealDetail"
         component={MealDetailScreen}
         options={({ route }) => ({
-          title: findMealById(route.params.id).title,
+          title: route.params.title,
           headerRight: () => <Ionicons name="star-outline" size={20} />,
         })}
       />

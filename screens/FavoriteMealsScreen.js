@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { useSelector } from 'react-redux';
 
+import { selectFavoriteMeals } from '../store/selectors/meals'
 import MealList from "../components/MealList";
-import { MEALS } from "../data/dummy-data";
 
 export default function FavoriteMealsScreen() {
-  const meals = MEALS.filter((meal) => ["m1", "m2"].includes(meal.id));
+  const meals = useSelector(selectFavoriteMeals)
   return <MealList meals={meals} />;
 }
 

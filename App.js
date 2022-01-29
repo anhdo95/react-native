@@ -3,7 +3,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import { Provider } from "react-redux";
 
+import store from "./store";
 import MealsFavoritesScreen from "./screens/MealsFavoritesScreen";
 import FilterMealsScreen from "./screens/FilterMealsScreen";
 import configs from "./configs";
@@ -19,27 +21,29 @@ export default function App() {
   if (!loaded) return <AppLoading />;
 
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        screenOptions={{
-          headerShown: false,
-          drawerActiveTintColor: configs.color.accent,
-          drawerLabelStyle: {
-            fontFamily: 'open-sans'
-          }
-        }}
-      >
-        <Drawer.Screen
-          name="MealsFavorites"
-          component={MealsFavoritesScreen}
-          options={{ title: "Meals" }}
-        />
-        <Drawer.Screen
-          name="FilterMeals"
-          component={FilterMealsScreen}
-          options={{ title: "Filters" }}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Drawer.Navigator
+          screenOptions={{
+            headerShown: false,
+            drawerActiveTintColor: configs.color.accent,
+            drawerLabelStyle: {
+              fontFamily: "open-sans",
+            },
+          }}
+        >
+          <Drawer.Screen
+            name="MealsFavorites"
+            component={MealsFavoritesScreen}
+            options={{ title: "Meals" }}
+          />
+          <Drawer.Screen
+            name="FilterMeals"
+            component={FilterMealsScreen}
+            options={{ title: "Filters" }}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }

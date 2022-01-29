@@ -11,10 +11,11 @@ import { useNavigation } from "@react-navigation/native";
 export default function MealList(props) {
   const { navigate } = useNavigation();
 
-  const handlePress = (id) => () => navigate("MealDetail", { id });
+  const handlePress = (item) => () =>
+    navigate("MealDetail", { id: item.id, title: item.title });
 
   const renderItem = ({ item }) => (
-    <TouchableNativeFeedback onPress={handlePress(item.id)}>
+    <TouchableNativeFeedback onPress={handlePress(item)}>
       <View style={styles.card}>
         <View style={styles.thumbnail}>
           <Image

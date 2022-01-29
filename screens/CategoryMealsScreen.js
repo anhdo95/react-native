@@ -1,17 +1,19 @@
 import { useMemo } from "react";
 import { StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
 
+import { selectMeals } from "../store/selectors/meals";
 import MealList from "../components/MealList";
-import { MEALS } from "../data/dummy-data";
 
 export default function CategoryMeals(props) {
   const { id } = props.route.params.category;
-  const meals = useMemo(
-    () => MEALS.filter((meal) => meal.categoryIds.includes(id)),
-    [id]
+  const meals = useSelector(selectMeals);
+  const categoryMeals = useMemo(
+    () => meals.filter((meal) => meal.categoryIds.includes(id)),
+    [id, meals]
   );
 
-  return <MealList meals={meals} />;
+  return <MealList meals={categoryMeals} />;
 }
 
 const styles = StyleSheet.create({});

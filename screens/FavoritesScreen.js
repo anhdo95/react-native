@@ -24,7 +24,7 @@ export default function FavoritesScreen() {
         name="MealDetail"
         component={MealDetailScreen}
         options={({ route }) => ({
-          title: findMealById(route.params.id).title,
+          title: route.params.title,
           headerRight: () => <Ionicons name="star-outline" size={20} />,
         })}
       />
