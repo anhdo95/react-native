@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import { Ionicons } from "@expo/vector-icons";
 
-import CategoriesScreen from "./screens/CategoriesScreen";
-import CategoryMealsScreen from "./screens/CategoryMealsScreen";
-import MealDetailScreen from "./screens/MealDetailScreen";
+import FavoritesScreen from "./screens/FavoritesScreen";
+import MealsScreen from "./screens/MealsScreen";
+import configs from "./configs";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -20,28 +21,31 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      <Tab.Navigator
         screenOptions={{
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
+          headerShown: false,
+          tabBarActiveTintColor: configs.color.accent,
         }}
       >
-        <Stack.Screen
-          name="Categories"
-          component={CategoriesScreen}
-          options={{ title: "Meal Categories" }}
+        <Tab.Screen
+          name="Meals"
+          component={MealsScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Ionicons {...props} name="restaurant" size={24} />
+            ),
+          }}
         />
-        <Stack.Screen
-          name="CategoryMeals"
-          component={CategoryMealsScreen}
-          options={({ route }) => ({
-            title: route.params.category.title,
-            headerTintColor: route.params.category.color,
-          })}
+        <Tab.Screen
+          name="Favorites"
+          component={FavoritesScreen}
+          options={{
+            tabBarIcon: (props) => (
+              <Ionicons {...props} name="star" size={24} />
+            ),
+          }}
         />
-        <Stack.Screen name="MealDetail" component={MealDetailScreen} />
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
