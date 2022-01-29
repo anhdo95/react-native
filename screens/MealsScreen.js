@@ -5,6 +5,7 @@ import CategoriesScreen from "./CategoriesScreen";
 import CategoryMealsScreen from "./CategoryMealsScreen";
 import MealDetailScreen from "./MealDetailScreen";
 
+import HeaderMenu from '../components/HeaderMenu'
 import { findMealById } from "../utils";
 
 const Stack = createNativeStackNavigator();
@@ -21,7 +22,7 @@ export default function MealsScreen() {
       <Stack.Screen
         name="Categories"
         component={CategoriesScreen}
-        options={{ title: "Meal Categories" }}
+        options={{ title: "Meal Categories", headerLeft: HeaderMenu }}
       />
       <Stack.Screen
         name="CategoryMeals"

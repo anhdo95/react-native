@@ -1,15 +1,14 @@
-import { StyleSheet } from "react-native";
+import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import { Ionicons } from "@expo/vector-icons";
 
-import FavoritesScreen from "./screens/FavoritesScreen";
-import MealsScreen from "./screens/MealsScreen";
+import MealsFavoritesScreen from "./screens/MealsFavoritesScreen";
+import FilterMealsScreen from "./screens/FilterMealsScreen";
 import configs from "./configs";
 
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -21,40 +20,26 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <Drawer.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: configs.color.accent,
+          drawerActiveTintColor: configs.color.accent,
+          drawerLabelStyle: {
+            fontFamily: 'open-sans'
+          }
         }}
       >
-        <Tab.Screen
-          name="Meals"
-          component={MealsScreen}
-          options={{
-            tabBarIcon: (props) => (
-              <Ionicons {...props} name="restaurant" size={24} />
-            ),
-          }}
+        <Drawer.Screen
+          name="MealsFavorites"
+          component={MealsFavoritesScreen}
+          options={{ title: "Meals" }}
         />
-        <Tab.Screen
-          name="Favorites"
-          component={FavoritesScreen}
-          options={{
-            tabBarIcon: (props) => (
-              <Ionicons {...props} name="star" size={24} />
-            ),
-          }}
+        <Drawer.Screen
+          name="FilterMeals"
+          component={FilterMealsScreen}
+          options={{ title: "Filters" }}
         />
-      </Tab.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
