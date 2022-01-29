@@ -1,18 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+
+import MealList from "../components/MealList";
+import { MEALS } from "../data/dummy-data";
 
 export default function FavoriteMealsScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Favorites Screen</Text>
-    </View>
-  );
+  const meals = MEALS.filter((meal) => ["m1", "m2"].includes(meal.id));
+  return <MealList meals={meals} />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const styles = StyleSheet.create({});

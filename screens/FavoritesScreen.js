@@ -18,7 +18,7 @@ export default function FavoritesScreen() {
       <Stack.Screen
         name="FavoriteMeals"
         component={FavoriteMealsScreen}
-        options={{ title: "Favorites" }}
+        options={{ title: "Your Favorites" }}
       />
       <Stack.Screen
         name="MealDetail"
