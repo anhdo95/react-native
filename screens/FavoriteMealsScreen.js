@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { useSelector } from 'react-redux';
 
-import { selectFavoriteMeals } from '../store/selectors/meals'
+import { selectFavoriteMeals } from '../store/slices/meals'
 import MealList from "../components/MealList";
 
 export default function FavoriteMealsScreen() {

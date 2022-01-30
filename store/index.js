@@ -1,9 +1,10 @@
-import { createStore, combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
-import meals from "./reducers/meals";
+import meals from "./slices/meals";
 
-export default createStore(
-  combineReducers({
+export default configureStore({
+  reducer: {
     meals,
-  })
-);
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
+});

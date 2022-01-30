@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 
-import { selectMeals } from "../store/selectors/meals";
+import { selectMeals } from "../store/slices/meals";
 import MealList from "../components/MealList";
 
 export default function CategoryMeals(props) {

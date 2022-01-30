@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Ionicons } from "@expo/vector-icons";
 
 import CategoriesScreen from "./CategoriesScreen";
 import CategoryMealsScreen from "./CategoryMealsScreen";
 import MealDetailScreen from "./MealDetailScreen";
 
+import HeaderFavorite from "../components/HeaderFavorite";
 import HeaderMenu from "../components/HeaderMenu";
 
 const Stack = createNativeStackNavigator();
@@ -36,7 +36,7 @@ export default function MealsScreen() {
         component={MealDetailScreen}
         options={({ route }) => ({
           title: route.params.title,
-          headerRight: () => <Ionicons name="star-outline" size={20} />,
+          headerRight: (props) => <HeaderFavorite {...props} mealId={route.params.id} />,
         })}
       />
     </Stack.Navigator>

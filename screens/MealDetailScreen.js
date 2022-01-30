@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 
-import { selectMealById } from "../store/selectors/meals";
+import { selectMealById } from "../store/slices/meals";
 
 export default function MealDetailScreen(props) {
   const meal = useSelector(selectMealById(props.route.params.id));
