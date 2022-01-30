@@ -1,16 +1,15 @@
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { Provider } from "react-redux";
 
 import store from "./store";
-import MealsFavoritesScreen from "./screens/MealsFavoritesScreen";
-import FilterMealsScreen from "./screens/FilterMealsScreen";
-import configs from "./configs";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
 
-const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -23,26 +22,17 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Drawer.Navigator
+        <Stack.Navigator
           screenOptions={{
             headerShown: false,
-            drawerActiveTintColor: configs.color.accent,
-            drawerLabelStyle: {
-              fontFamily: "open-sans",
+            headerTitleStyle: {
+              fontWeight: "bold",
             },
           }}
         >
-          <Drawer.Screen
-            name="MealsFavorites"
-            component={MealsFavoritesScreen}
-            options={{ title: "Meals" }}
-          />
-          <Drawer.Screen
-            name="FilterMeals"
-            component={FilterMealsScreen}
-            options={{ title: "Filters" }}
-          />
-        </Drawer.Navigator>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );

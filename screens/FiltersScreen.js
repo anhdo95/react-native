@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import configs from "../configs";
 
 import FilterSwitch from "../components/FilterSwitch";
@@ -17,11 +17,8 @@ export default function FiltersScreen() {
           value={isGlueFree}
           onChange={setIsGlueFree}
         />
-        <FilterSwitch
-          label="Vegan"
-          value={isVegan}
-          onChange={setIsVegan}
-        />
+        <FilterSwitch label="Vegan" value={isVegan} onChange={setIsVegan} />
+
       </View>
     </View>
   );
@@ -31,11 +28,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   options: {
     width: "80%",
-    marginTop: 20
+    marginTop: 20,
   },
   heading: {
     fontSize: 18,
@@ -47,5 +44,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 20,
+  },
+  input: {
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
